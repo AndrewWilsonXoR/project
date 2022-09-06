@@ -1,0 +1,29 @@
+body{
+    margin:0;
+    padding:0;
+}
+.mainChessBoard{
+    display:flex;
+    width:800px;
+    height:800px;
+    outline:1px solid black;
+    flex-wrap:wrap;
+}
+div
+{
+ width:100px;
+ height:100px;
+ float:left;
+}
+.container{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#wpawn{
+    width:100px;
+    height:100px;
+    float:left;
+}
