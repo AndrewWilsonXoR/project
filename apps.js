@@ -3814,6 +3814,7 @@ function movePiece(elem) {
                 $("whiteChoice").style.display = "block";
                 $("blackChoice").style.display = "none";
                 promoteWhitePawn = false;
+                
             } else {                
                 removeHighlight(selected);
                 elem.appendChild(selected);
@@ -3841,9 +3842,6 @@ function movePiece(elem) {
             } else {
                 fiftfy_move_count++;                
             }
-            let newRow = document.getElementById("move-template").content.cloneNode(true);
-            newRow.querySelectorAll("td")[0].innerHTML = moveNote;
-            document.getElementById("move-history").appendChild(newRow);
         } 
         else if(black_pieces.includes(selected.id,0)  && TURN == "black" && canMoveTo(elem)){    
             TURN = "white";
@@ -3892,12 +3890,10 @@ function movePiece(elem) {
             } else {
                 fiftfy_move_count++;                
             }
-            document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[1].innerHTML = moveNote;
         } 
         else {
             console.log("Move failed: ",selected.id," to ",elem.id);
         }
-        check_fifty_move_rule();
         checkIfGameOver();
         if(checkInsufficientMaterial()){
             GAME_OVER = true;
@@ -3965,8 +3961,6 @@ function promotePawn(selectedPiece){
         black_pieces.push(id);
         current_setup[id] = promoteBlackPawnTo;
         selected = undefined;
-        document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[1].innerHTML += "=";
-        document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[1].innerHTML += id;
     } else if(selectedPiece.id == "w_Q" || selectedPiece.id == "w_R" || selectedPiece.id == "w_K" ||
      selectedPiece.id == "w_Q") {
         let id = selectedPiece.id+promoted_counter[selectedPiece.id][0];
@@ -3980,8 +3974,6 @@ function promotePawn(selectedPiece){
         white_pieces.push(id);
         current_setup[id] = promoteWhitePawnTo;
         selected = undefined;
-        document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[0].innerHTML += "=";
-        document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[0].innerHTML += id;
     }
     $("prompt").style.display = "none";
 }
@@ -3990,23 +3982,6 @@ const white_draw = $('white-draw');
 const agree_draw = $('agree-draw');
 const disagree_draw = $('disagree-draw');
 const restart_game = $('restart');
-let white_wants_draw = false;
-let black_wants_draw = false;
-black_resign.onclick = function() {
-    if(GAME_OVER) return;
-    GAME_OVER = true;
-    $('gameOverNotice').style.display = "block";
-    $('gameOverNotice').children[0].innerHTML = "Player Resigned!";
-    alert("Game over! Black Player resigned!");    
-}
-white_resign.onclick = function() {
-    if(GAME_OVER) return;
-    console.log("white resigned");
-    GAME_OVER = true;
-    $('gameOverNotice').style.display = "block";
-    $('gameOverNotice').children[0].innerHTML = "White Player Resigned!";
-    alert("Game over! White Player resigned!");    
-}
 restart_game.onclick = function() {
     TURN = "white";
     $('black-turn').style.display = "none";
