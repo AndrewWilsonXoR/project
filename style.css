@@ -1,29 +1,157 @@
 body{
-    margin:0;
-    padding:0;
-}
-.mainChessBoard{
-    display:flex;
-    width:800px;
-    height:800px;
-    outline:1px solid black;
-    flex-wrap:wrap;
-}
-div
-{
- width:100px;
- height:100px;
- float:left;
-}
-.container{
-    width:100vw;
-    height:100vh;
+    background-size:contain;
+    background-repeat:no-repeat;
+    color: white;
     display:flex;
     justify-content:center;
+}
+.erything{
+    background-image: url("https://s3.envato.com/files/04e89601-d0d5-4598-ba84-5ea27e92d5f3/inline_image_preview.jpg");
+    background-size: cover;
+    height:100vh;
+    width:100vw;
+    margin:-10px;
+    padding:0px;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
     align-items:center;
 }
-#wpawn{
-    width:100px;
-    height:100px;
-    float:left;
+.box{
+    background-color: #A52A2A;
+    height: 50px;
+    width: 50px;
+    margin: -2px;
+    display: inline-block;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 40px;
+    vertical-align: top;
+
+}
+.chessboard{
+     min-width: 600px;
+}
+.box >a {
+    user-select: none;
+}
+.box > a:hover{
+    cursor: pointer;
+}
+.level1,.level2,.level3,.level4,.level5,.level6,.level7,.level8,.level0{
+    background-color: none;
+    height:20px;
+    margin: -2px;
+    width: 10px;
+    display: inline-block;
+    border: 1px solid black;
+}
+#outHolder{
+    padding:10px 10px;
+    margin-bottom: 5px;
+}
+#blackTaken, #whiteTaken{
+    background-color: lightsteelblue;
+    height:30px;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#blackTaken a, #whiteTaken a {
+    pointer-events: none;
+}
+.black{    
+    background-color: #C0C0C0;
+}
+.a,.b,.c,.d,.e,.f,.g,.h{
+   border: 1px dotted black;
+    height: 20px;
+    margin: -2px;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+}
+.black-piece{
+    color: #000;
+}
+.highlight{
+    background-color:lightgreen;
+}
+.selected{
+    background-color:yellowgreen;
+}
+.danger{
+    background-color: lightcoral;
+}
+#prompt, #gameOverNotice{
+    position: absolute;
+    background-color: #ffaa00;
+    margin-top: 150px;
+    width: 450px;
+    display: grid;
+    height: 80px;
+}
+#prompt, #gameOverNotice{
+    display: none;
+}
+#gameOverNotice{
+    text-align:center;
+}
+#blackChoice, #whiteChoice{    
+    position: absolute;
+    left: 30%;
+}
+#whiteChoice{
+    display: none;
+}
+#blackChoice > a, #whiteChoice > a {
+    font-size: 40px;
+    margin: 0 auto;
+    border: 2px dotted #000;
+}
+#blackChoice a:hover, #whiteChoice a:hover {
+    cursor: pointer;
+}
+ul {
+  font-size:20px;
+}
+#black-turn{
+  color: #fff;
+}
+#white-turn{
+  color: #fff;
+}
+#label{
+  background:#00c7fc;
+  color:#fff;
+  width: 50px;
+  border-radius:5px;
+  padding:5px;
+  font-weight:bolder;
+}
+.move{
+    font-size: 12px;
+}
+button{
+    margin:5px 5px;
+}
+#restart{
+    background:red;
+    color:white;
+    border-radius:5px;
+}
+#game-options{
+    margin:10px
+}
+#move-table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+td{
+    padding-left:5px;
+}
+.move-wrapper{
+    max-height:250px;
+    width:200px;
+    overflow-y:auto;
 }

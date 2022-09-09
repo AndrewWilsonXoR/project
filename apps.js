@@ -3985,16 +3985,6 @@ function promotePawn(selectedPiece){
     }
     $("prompt").style.display = "none";
 }
-function check_fifty_move_rule(){
-    if(fiftfy_move_count == 50){
-        GAME_OVER = true;
-        $('gameOverNotice').style.display = "block";
-        $('gameOverNotice').children[0].innerHTML = "Game draw! by 50 move rule.";
-        alert("Game draw! by 50 move rule.");
-    }
-}
-const black_resign = $('black-resign');
-const white_resign = $('white-resign');
 const black_draw = $('black-draw');
 const white_draw = $('white-draw');
 const agree_draw = $('agree-draw');
@@ -4016,37 +4006,6 @@ white_resign.onclick = function() {
     $('gameOverNotice').style.display = "block";
     $('gameOverNotice').children[0].innerHTML = "White Player Resigned!";
     alert("Game over! White Player resigned!");    
-}
-black_draw.onclick = function() {
-    if(GAME_OVER) return;
-    if(!black_wants_draw){
-        black_wants_draw = true;
-        $('draw-notice').style.display = "block"; 
-        $('resigning-player').innerHTML = "Black wants a draw?"; 
-    }
-}
-white_draw.onclick = function() {
-    if(GAME_OVER) return;
-    if(!white_wants_draw){
-        white_wants_draw = true;
-        $('draw-notice').style.display = "block"; 
-        $('resigning-player').innerHTML = "White wants to draw?"; 
-    }
-}
-agree_draw.onclick = function() {
-    if(GAME_OVER) return;  
-    $('draw-notice').style.display = "none"; 
-    if(white_wants_draw || black_wants_draw){
-        GAME_OVER = true;
-        alert("Game drawn by agreement!");
-    }
-}
-disagree_draw.onclick = function() {
-    if(GAME_OVER) return;
-    $('draw-notice').style.display = "none"; 
-    white_wants_draw = false;
-    black_wants_draw = false;
-    alert("Draw request declined.");
 }
 restart_game.onclick = function() {
     TURN = "white";
