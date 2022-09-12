@@ -3825,7 +3825,9 @@ function movePiece(elem) {
                 moveNote = moveNote +"x"+ removePiece;
                 removePiece = "";
             }
-            console.log("Moved WhitePiece");            
+            console.log("Moved WhitePiece");
+            console.log("white turn over");
+            console.log("Black's turn:");           
             if(IsKingInCheck(Object.assign({}, current_setup))){
                 $(current_setup["bK"]).classList.add("danger");
                 moveNote = moveNote +"+";
@@ -3874,6 +3876,8 @@ function movePiece(elem) {
                 removePiece = "";
             }
             console.log("Moved BlackPiece");
+            console.log("black turn over");
+            console.log("White's turn:");
             if(IsKingInCheck(Object.assign({}, current_setup))){
                 $(current_setup["wK"]).classList.add("danger");
                 moveNote = moveNote + "+";
@@ -3914,6 +3918,7 @@ function moveWhite(elem){
             selected = undefined;  
             return;
         }
+        
     }
     if(TURN == "white") {
         if( selected  && selected.nodeType ) {
@@ -3923,7 +3928,8 @@ function moveWhite(elem){
         selected = elem;
         $(current_setup[elem.id]).classList.add("selected");                
         addHighlight(elem);
-    }       
+        
+    }
 }
 function moveBlack(elem)
 {
