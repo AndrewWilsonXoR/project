@@ -2715,7 +2715,7 @@ function IsKingInCheck(board) {
                     let id =  String.fromCharCode(charIndex) + (numIndex);
                     if(Object.values(board).includes(id) && id != pos) break;
                     if(id == pos)
-                        return true;      
+                    return true;      
                 }
             }
         }
@@ -2730,7 +2730,7 @@ function IsKingInCheck(board) {
                         let id = currPos[0]+temp.toString();
                         if(Object.values(board).includes(id) && id != pos) break;
                         if(id == pos)
-                            return true; 
+                        return true; 
                     }
                     temp--;
                 }
@@ -2740,7 +2740,7 @@ function IsKingInCheck(board) {
                         let id = currPos[0]+temp2.toString();
                         if(Object.values(board).includes(id) && id != pos) break;
                         if(id == pos)
-                            return true;  
+                        return true;  
                     }
                     temp2++;
                 }
@@ -2750,7 +2750,7 @@ function IsKingInCheck(board) {
                         let id =  String.fromCharCode(index)+currPos[1];
                         if(Object.values(board).includes(id) && id != pos) break;
                         if(id == pos)
-                            return true; 
+                        return true; 
                     }            
                     index--;
                 }
@@ -2761,209 +2761,197 @@ function IsKingInCheck(board) {
                         if(Object.values(board).includes(id) && id != pos) break;
                         if(id == pos)
                             return true; 
-                    }            
-                    index2++;
-                }
-                numIndex = Number(currPos[1]);
-                charIndex = currPos[0].charCodeAt(0);
-                while(charIndex < 104){
-                    if(numIndex == 1)break;
-                    charIndex++;
-                    numIndex--;                     
-                    let id =  String.fromCharCode(charIndex) + (numIndex);
-                    if(Object.values(board).includes(id) && id != pos) break;
-                    if(id == pos)
+                        }            
+                        index2++;
+                    }
+                    numIndex = Number(currPos[1]);
+                    charIndex = currPos[0].charCodeAt(0);
+                    while(charIndex < 104){
+                        if(numIndex == 1)break;
+                        charIndex++;
+                        numIndex--;                     
+                        let id =  String.fromCharCode(charIndex) + (numIndex);
+                        if(Object.values(board).includes(id) && id != pos) break;
+                        if(id == pos)
                         return true;    
-                }
-                numIndex = Number(currPos[1]);
-                charIndex = currPos[0].charCodeAt(0);
-                while(charIndex < 104){
-                    if(numIndex == 8)break;
-                    charIndex++;
-                    numIndex++;                      
-                    let id =  String.fromCharCode(charIndex) + (numIndex);
-                    if(Object.values(board).includes(id) && id != pos) break;             
-                    if(id == pos){
-                        return true;
                     }
-                }
-                numIndex = Number(currPos[1]);
-                charIndex = currPos[0].charCodeAt(0);
-                while(charIndex > 97){
-                    if(numIndex == 1)break;
-                    charIndex--;
-                    numIndex--;
-                    let id =  String.fromCharCode(charIndex) + (numIndex);
-                    if(Object.values(board).includes(id) && id != pos) break;
-                    if(id == pos)
+                    numIndex = Number(currPos[1]);
+                    charIndex = currPos[0].charCodeAt(0);
+                    while(charIndex < 104){
+                        if(numIndex == 8)break;
+                        charIndex++;
+                        numIndex++;                      
+                        let id =  String.fromCharCode(charIndex) + (numIndex);
+                        if(Object.values(board).includes(id) && id != pos) break;             
+                        if(id == pos){
+                            return true;
+                        }
+                    }
+                    numIndex = Number(currPos[1]);
+                    charIndex = currPos[0].charCodeAt(0);
+                    while(charIndex > 97){
+                        if(numIndex == 1)break;
+                        charIndex--;
+                        numIndex--;
+                        let id =  String.fromCharCode(charIndex) + (numIndex);
+                        if(Object.values(board).includes(id) && id != pos) break;
+                        if(id == pos)
                         return true;         
-                }
-                numIndex = Number(currPos[1]);
-                charIndex = currPos[0].charCodeAt(0);
-                while(charIndex > 97){
-                    if(numIndex == 8 )break;
-                    charIndex--;
-                    numIndex++;
-                    let id =  String.fromCharCode(charIndex) + (numIndex);
-                    if(Object.values(board).includes(id) && id != pos) break;
-                    if(id == pos)
+                    }
+                    numIndex = Number(currPos[1]);
+                    charIndex = currPos[0].charCodeAt(0);
+                    while(charIndex > 97){
+                        if(numIndex == 8 )break;
+                        charIndex--;
+                        numIndex++;
+                        let id =  String.fromCharCode(charIndex) + (numIndex);
+                        if(Object.values(board).includes(id) && id != pos) break;
+                        if(id == pos)
                         return true; 
+                    }
                 }
             }
         }
+        return false;
     }
-    return false;
-}
-function checkIfGameOver() {
-    if(TURN == "black" && IsKingInCheck(Object.assign({}, current_setup))){
-        let total = getAllPossibleMove();
-        if(total == 0){
-            GAME_OVER = true;
-            $('gameOverNotice').style.display = "block";
-            $('gameOverNotice').children[0].innerHTML = "White wins!";
-            document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[0].innerHTML += "+";
-            alert("Game over! White win!");
+    function checkIfGameOver() {
+        if(TURN == "black" && IsKingInCheck(Object.assign({}, current_setup))){
+            let total = getAllPossibleMove();
+            if(total == 0){
+                GAME_OVER = true;
+                $('gameOverNotice').style.display = "block";
+                $('gameOverNotice').children[0].innerHTML = "White wins!";
+                document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[0].innerHTML += "+";
+                alert("Game over! White win!");
+            }
+        } else if (TURN == "white" && IsKingInCheck(Object.assign({}, current_setup))){
+            let total = getAllPossibleMove();
+            if(total == 0){
+                GAME_OVER = true;
+                $('gameOverNotice').style.display = "block";
+                $('gameOverNotice').children[0].innerHTML = "Black wins!";
+                document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[1].innerHTML += "+";
+                alert("Game over! Black win!");
+            }
+        } else if(TURN == "black" && !IsKingInCheck(Object.assign({}, current_setup))){
+            let total = getAllPossibleMove();
+            if(total == 0){
+                GAME_OVER = true;
+                $('gameOverNotice').style.display = "block";
+                $('gameOverNotice').children[0].innerHTML = "Stalemate!";
+                alert("Game over! Stalemate!");
+            }
+        } else if (TURN == "white" && !IsKingInCheck(Object.assign({}, current_setup))){
+            let total = getAllPossibleMove();
+            if(total == 0){
+                GAME_OVER = true;
+                $('gameOverNotice').style.display = "block";
+                $('gameOverNotice').children[0].innerHTML = "Stalemate!";
+                alert("Game over! Stalemate!");
+            }
         }
-    } else if (TURN == "white" && IsKingInCheck(Object.assign({}, current_setup))){
-        let total = getAllPossibleMove();
-        if(total == 0){
-            GAME_OVER = true;
-            $('gameOverNotice').style.display = "block";
-            $('gameOverNotice').children[0].innerHTML = "Black wins!";
-            document.querySelectorAll(".move:last-child")[0].getElementsByTagName('td')[1].innerHTML += "+";
-            alert("Game over! Black win!");
-        }
-    } else if(TURN == "black" && !IsKingInCheck(Object.assign({}, current_setup))){
-        let total = getAllPossibleMove();
-        if(total == 0){
-            GAME_OVER = true;
-            $('gameOverNotice').style.display = "block";
-            $('gameOverNotice').children[0].innerHTML = "Stalemate!";
-            alert("Game over! Stalemate!");
-        }
-    } else if (TURN == "white" && !IsKingInCheck(Object.assign({}, current_setup))){
-        let total = getAllPossibleMove();
-        if(total == 0){
-            GAME_OVER = true;
-            $('gameOverNotice').style.display = "block";
-            $('gameOverNotice').children[0].innerHTML = "Stalemate!";
-            alert("Game over! Stalemate!");
-        }
+        return false;
     }
-    return false;
-}
-function checkInsufficientMaterial() {
-    let bp = [];
-    let wp =[];
-    for(let i = 0; i < black_pieces.length;i++){
-        if(current_setup[black_pieces[i]] != "x"){
-            bp.push(black_pieces[i]);
+    function checkInsufficientMaterial() {
+        let bp = [];
+        let wp =[];
+        for(let i = 0; i < black_pieces.length;i++){
+            if(current_setup[black_pieces[i]] != "x"){
+                bp.push(black_pieces[i]);
+            }
         }
-    }
-    for(let i = 0; i < white_pieces.length;i++){
-        if(current_setup[white_pieces[i]] != "x"){
-            wp.push(white_pieces[i]);
+        for(let i = 0; i < white_pieces.length;i++){
+            if(current_setup[white_pieces[i]] != "x"){
+                wp.push(white_pieces[i]);
+            }
         }
-    }
-    if(bp.length == 1 && wp.length == 1) return true;
-    if(bp.length == 2 && wp.length == 1){
-        if(wp[0] == "bK" && (wp[1] == "bBw" || wp[1] == "bBb"|| wp[1] == "bKw" || wp[1] == "bKb"|| 
-        wp[1].substring(0,3) == "b_K" || wp[1].substring(0,3) == "b_B")){
-            return true;
-        } 
-        if(wp[1] == "bK" && (wp[0] == "bBw" || wp[0] == "bBb"|| wp[0] == "bKw" || wp[0] == "bKb"|| 
-        wp[0].substring(0,3) == "b_K" || wp[0].substring(0,3) == "b_B")){
-            return true;
-        } 
-    } else if(wp.length == 2 && bp.length == 1) {
-        if(wp[0] == "wK" && (wp[1] == "wBw" || wp[1] == "wBb"|| wp[1] == "wKw" || wp[1] == "wKb"|| 
-        wp[1].substring(0,3) == "w_K" || wp[1].substring(0,3) == "w_B")){
-            return true;
-        } 
-        if(wp[1] == "wK" && (wp[0] == "wBw" || wp[0] == "wBb"|| wp[0] == "wKw" || wp[0] == "wKb"|| 
-        wp[0].substring(0,3) == "w_K" || wp[0].substring(0,3) == "w_B")){
-            return true;
-        } 
-    }
-    return false;
-}
-let selected;
-let previousBlackMove;
-let previousWhiteMove;
-let enPassant = false;
-let blackCastle = false;
-let whiteCastle = false;
-let bcRight = false;
-let bcLeft = false;
-let wcRight = false;
-let wcLeft = false;
-let promoteBlackPawn = false;
-let promoteWhitePawn = false;
-function canBeTaken(pos){
-    let piece = selected;
-    if($(pos.id).children.length != 0){
-        if($(pos.id).children[0].id == "bK" || $(pos.id).children[0].id == "wK") {
-            console.log("Can't take king");
-            return false;
-        } else if(black_pieces.includes(pos.children[0].id) && TURN == "black"){
-            return false;
-        } else if(white_pieces.includes(pos.children[0].id) && TURN == "white"){
-            return false;
+        if(bp.length == 1 && wp.length == 1) return true;
+        if(bp.length == 2 && wp.length == 1){
+            if(wp[0] == "bK" && (wp[1] == "bBw" || wp[1] == "bBb"|| wp[1] == "bKw" || wp[1] == "bKb"|| 
+            wp[1].substring(0,3) == "b_K" || wp[1].substring(0,3) == "b_B")){
+                return true;
+            } 
+            if(wp[1] == "bK" && (wp[0] == "bBw" || wp[0] == "bBb"|| wp[0] == "bKw" || wp[0] == "bKb"|| 
+            wp[0].substring(0,3) == "b_K" || wp[0].substring(0,3) == "b_B")){
+                return true;
+            } 
+        } else if(wp.length == 2 && bp.length == 1) {
+            if(wp[0] == "wK" && (wp[1] == "wBw" || wp[1] == "wBb"|| wp[1] == "wKw" || wp[1] == "wKb"|| 
+            wp[1].substring(0,3) == "w_K" || wp[1].substring(0,3) == "w_B")){
+                return true;
+            } 
+            if(wp[1] == "wK" && (wp[0] == "wBw" || wp[0] == "wBb"|| wp[0] == "wKw" || wp[0] == "wKb"|| 
+            wp[0].substring(0,3) == "w_K" || wp[0].substring(0,3) == "w_B")){
+                return true;
+            } 
         }
+        return false;
     }
-    let dummyBoard = Object.assign({}, current_setup);
-    if(piece.id == "bRw" || piece.id == "bRb" || piece.id == "wRw" || piece.id == "wRb"
+    function canBeTaken(pos){
+        let piece = selected;
+        if($(pos.id).children.length != 0){
+            if($(pos.id).children[0].id == "bK" || $(pos.id).children[0].id == "wK") {
+                console.log("Can't take king");
+                return false;
+            } else if(black_pieces.includes(pos.children[0].id) && TURN == "black"){
+                return false;
+            } else if(white_pieces.includes(pos.children[0].id) && TURN == "white"){
+                return false;
+            }
+        }
+        let dummyBoard = Object.assign({}, current_setup);
+        if(piece.id == "bRw" || piece.id == "bRb" || piece.id == "wRw" || piece.id == "wRb"
         || piece.id.substring(0,3) == "b_R" || piece.id.substring(0,3) == "w_R"){
-        previousBlackMove = undefined;
-        previousWhiteMove = undefined;
-        let currPos = current_setup[piece.id];
-        let temp = Number(currPos[1]);
-        while(temp > 0 ){
-            if(Number(currPos[1]) != temp){
-                let id = currPos[0]+temp.toString();
-                if(id != pos.id && $(id).children.length != 0)
+            previousBlackMove = undefined;
+            previousWhiteMove = undefined;
+            let currPos = current_setup[piece.id];
+            let temp = Number(currPos[1]);
+            while(temp > 0 ){
+                if(Number(currPos[1]) != temp){
+                    let id = currPos[0]+temp.toString();
+                    if(id != pos.id && $(id).children.length != 0)
                     break;
-                if(id == pos.id){
-                    dummyBoard[piece.id] = id;
-                    if(pos.children.length != 0)
+                    if(id == pos.id){
+                        dummyBoard[piece.id] = id;
+                        if(pos.children.length != 0)
                         dummyBoard[pos.children[0].id] = "x";
-                    if(!IsKingInCheck(dummyBoard)){
-                        return true;                 
+                        if(!IsKingInCheck(dummyBoard)){
+                            return true;                 
+                        }
                     }
                 }
+                temp--;
             }
-            temp--;
-        }
-        dummyBoard = Object.assign({}, current_setup);
-        let temp2 = Number(currPos[1]);
-        while(temp2 < 9 ){
-            if(Number(currPos[1]) != temp2){
-                let id = currPos[0]+temp2.toString();
-                if(id != pos.id && $(id).children.length != 0)
+            dummyBoard = Object.assign({}, current_setup);
+            let temp2 = Number(currPos[1]);
+            while(temp2 < 9 ){
+                if(Number(currPos[1]) != temp2){
+                    let id = currPos[0]+temp2.toString();
+                    if(id != pos.id && $(id).children.length != 0)
                     break;
-                if(id == pos.id){
-                    dummyBoard[piece.id] = id;
-                    if(pos.children.length != 0)
+                    if(id == pos.id){
+                        dummyBoard[piece.id] = id;
+                        if(pos.children.length != 0)
                         dummyBoard[pos.children[0].id] = "x";
-                    if(!IsKingInCheck(dummyBoard)){
-                        return true;
+                        if(!IsKingInCheck(dummyBoard)){
+                            return true;
+                        }
                     }
                 }
+                temp2++;
             }
-            temp2++;
-         }
-        dummyBoard = Object.assign({}, current_setup);
-        let index = currPos[0].charCodeAt(0);
-        while(index > 96){
-            if(currPos[0].charCodeAt(0) != index){
+            dummyBoard = Object.assign({}, current_setup);
+            let index = currPos[0].charCodeAt(0);
+            while(index > 96){
+                if(currPos[0].charCodeAt(0) != index){
                 let id =  String.fromCharCode(index)+currPos[1];
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;
                     }
@@ -2977,11 +2965,11 @@ function canBeTaken(pos){
             if(currPos[0].charCodeAt(0) != index2){
                 let id =  String.fromCharCode(index2)+currPos[1];
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;
                     }
@@ -2992,7 +2980,7 @@ function canBeTaken(pos){
         return false;      
     } 
     else if(piece.id == "bKw" || piece.id == "bKb" || piece.id == "wKw" || piece.id == "wKb"
-        || piece.id.substring(0,3) == "b_K" || piece.id.substring(0,3) == "w_K"){
+    || piece.id.substring(0,3) == "b_K" || piece.id.substring(0,3) == "w_K"){
         let currPos = current_setup[piece.id];
         let numIndex = Number(currPos[1]);
         let charIndex = currPos[0].charCodeAt(0);
@@ -3004,7 +2992,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3016,7 +3004,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";       
+                dummyBoard[pos.children[0].id] = "x";       
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3028,7 +3016,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3040,7 +3028,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3052,7 +3040,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3064,7 +3052,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";          
+                dummyBoard[pos.children[0].id] = "x";          
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3076,7 +3064,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";       
+                dummyBoard[pos.children[0].id] = "x";       
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3088,7 +3076,7 @@ function canBeTaken(pos){
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;
                 }
@@ -3097,7 +3085,7 @@ function canBeTaken(pos){
         return false;
     }
     else if(piece.id == "bP1" || piece.id == "bP2" || piece.id == "bP3" || piece.id == "bP4" ||
-     piece.id == "bP5" || piece.id == "bP6" || piece.id == "bP7" || piece.id == "bP8"){        
+    piece.id == "bP5" || piece.id == "bP6" || piece.id == "bP7" || piece.id == "bP8"){        
         let currPos = current_setup[piece.id];
         let numIndex = Number(currPos[1]);
         let charIndex = currPos[0].charCodeAt(0);
@@ -3110,7 +3098,7 @@ function canBeTaken(pos){
                     dummyBoard[piece.id] = id2;
                     dummyBoard[pos.children[0].id] = "x";
                     if(numIndex - 1 == 1)
-                        promoteBlackPawn = true;
+                    promoteBlackPawn = true;
                     if(!IsKingInCheck(dummyBoard)){
                         return true;
                     }
@@ -3124,7 +3112,7 @@ function canBeTaken(pos){
                     dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         if(numIndex - 1 == 1)
-                            promoteBlackPawn = true;
+                        promoteBlackPawn = true;
                         return true;                 
                     }
                 }
@@ -3199,7 +3187,7 @@ function canBeTaken(pos){
         return false;
     }
     else if(piece.id == "wP1" || piece.id == "wP2" || piece.id == "wP3" || piece.id == "wP4" ||
-     piece.id == "wP5" || piece.id == "wP6" || piece.id == "wP7" || piece.id == "wP8"){        
+    piece.id == "wP5" || piece.id == "wP6" || piece.id == "wP7" || piece.id == "wP8"){        
         let currPos = current_setup[piece.id];
         let numIndex = Number(currPos[1]);
         let charIndex = currPos[0].charCodeAt(0);
@@ -3213,7 +3201,7 @@ function canBeTaken(pos){
                     dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         if(numIndex + 1 == 8)
-                            promoteWhitePawn = true;
+                        promoteWhitePawn = true;
                         return true;                 
                     }
                 }
@@ -3226,7 +3214,7 @@ function canBeTaken(pos){
                     dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         if(numIndex + 1 == 8)
-                            promoteWhitePawn = true;
+                        promoteWhitePawn = true;
                         return true;                 
                     }
                 }
@@ -3295,7 +3283,7 @@ function canBeTaken(pos){
                     dummyBoard[piece.id] = id;
                     if(!IsKingInCheck(dummyBoard)){
                         if(numIndex + 1 == 8)
-                            promoteWhitePawn = true;
+                        promoteWhitePawn = true;
                         return true;                 
                     }
                 }
@@ -3304,7 +3292,7 @@ function canBeTaken(pos){
         return false;        
     }
     else if(piece.id == "bBw" || piece.id == "bBb" || piece.id == "wBb" || piece.id == "wBw" 
-            || piece.id.substring(0,3) == "b_B" || piece.id.substring(0,3) == "w_B"){
+    || piece.id.substring(0,3) == "b_B" || piece.id.substring(0,3) == "w_B"){
         previousBlackMove = undefined;
         previousWhiteMove = undefined;
         let currPos = current_setup[piece.id];
@@ -3317,10 +3305,10 @@ function canBeTaken(pos){
             numIndex--;
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                    break;
+            break;
             if(id == pos.id){
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
@@ -3336,10 +3324,10 @@ function canBeTaken(pos){
             numIndex++;            
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
             if(id == pos.id){
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
@@ -3355,10 +3343,10 @@ function canBeTaken(pos){
             numIndex--;
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                    break;
+            break;
             if(id == pos.id){
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
@@ -3375,19 +3363,19 @@ function canBeTaken(pos){
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id == pos.id){
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
             }             
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
         }
         return false;
     }
     else if(piece.id == "bQ" || piece.id == "wQ" ||
-            piece.id.substring(0,3) == "b_Q" || piece.id.substring(0,3) == "w_Q"){
+    piece.id.substring(0,3) == "b_Q" || piece.id.substring(0,3) == "w_Q"){
         previousBlackMove = undefined;
         previousWhiteMove = undefined;
         let currPos = current_setup[piece.id];
@@ -3397,11 +3385,11 @@ function canBeTaken(pos){
             if(Number(currPos[1]) != temp){
                 let id = currPos[0]+temp.toString();
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;                 
                     }
@@ -3415,11 +3403,11 @@ function canBeTaken(pos){
             if(Number(currPos[1]) != temp2){
                 let id = currPos[0]+temp2.toString();
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;                 
                     }
@@ -3433,16 +3421,16 @@ function canBeTaken(pos){
             if(currPos[0].charCodeAt(0) != index){
                 let id =  String.fromCharCode(index)+currPos[1];
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;                 
                     }
                 }
-                 
+                
             }            
             index--;
         }
@@ -3452,11 +3440,11 @@ function canBeTaken(pos){
             if(currPos[0].charCodeAt(0) != index2){
                 let id =  String.fromCharCode(index2)+currPos[1];
                 if(id != pos.id && $(id).children.length != 0)
-                    break;
+                break;
                 if(id == pos.id){
                     dummyBoard[piece.id] = id;
                     if(pos.children.length != 0)
-                        dummyBoard[pos.children[0].id] = "x";
+                    dummyBoard[pos.children[0].id] = "x";
                     if(!IsKingInCheck(dummyBoard)){
                         return true;                 
                     }
@@ -3473,11 +3461,11 @@ function canBeTaken(pos){
             numIndex--;                     
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3493,11 +3481,11 @@ function canBeTaken(pos){
             numIndex++;                      
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3512,11 +3500,11 @@ function canBeTaken(pos){
             numIndex--;
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3531,11 +3519,11 @@ function canBeTaken(pos){
             numIndex++;
             let id =  String.fromCharCode(charIndex) + (numIndex);
             if(id != pos.id && $(id).children.length != 0)
-                break;
+            break;
             if(id == pos.id){
                 dummyBoard[piece.id] = id;
                 if(pos.children.length != 0)
-                    dummyBoard[pos.children[0].id] = "x";
+                dummyBoard[pos.children[0].id] = "x";
                 if(!IsKingInCheck(dummyBoard)){
                     return true;                 
                 }
@@ -3555,7 +3543,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }        
         if(charIndex - 1 >= 97){
@@ -3564,7 +3552,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }
         if(numIndex + 1 <= 8){
@@ -3573,7 +3561,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }        
         if(numIndex - 1 >= 1){
@@ -3582,7 +3570,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }
         if(charIndex + 1 <= 104 && numIndex+1 <= 8){
@@ -3591,7 +3579,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }
         if(charIndex + 1 <= 104 && numIndex-1 >= 1){
@@ -3600,7 +3588,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }
         if(charIndex - 1  >= 97  && numIndex+1 <= 8){
@@ -3609,7 +3597,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             } 
         }
         if(charIndex - 1 >= 97 && numIndex-1 >= 1){
@@ -3618,7 +3606,7 @@ function canBeTaken(pos){
             if(id == pos.id) {
                 dummyBoard[piece.id] = id;
                 if(!IsKingInCheck(dummyBoard) && !isKingProtectingTheSquare(id))
-                    return true;
+                return true;
             }
         }
         if(piece.id == "bK" && !Moved_castle["bK"]){
@@ -3709,6 +3697,18 @@ function canBeTaken(pos){
     return false;    
 }
 let removePiece = "";
+let selected;
+let previousBlackMove;
+let previousWhiteMove;
+let enPassant = false;
+let blackCastle = false;
+let whiteCastle = false;
+let bcRight = false;
+let bcLeft = false;
+let wcRight = false;
+let wcLeft = false;
+let promoteBlackPawn = false;
+let promoteWhitePawn = false;
 let piece_capture = false;
 function canMoveTo(elem){
     if(elem.children.length == 0 && canBeTaken(elem) ){
@@ -3983,10 +3983,6 @@ function promotePawn(selectedPiece){
     }
     $("prompt").style.display = "none";
 }
-const black_draw = $('black-draw');
-const white_draw = $('white-draw');
-const agree_draw = $('agree-draw');
-const disagree_draw = $('disagree-draw');
 const restart_game = $('restart');
 restart_game.onclick = function() {
     TURN = "white";

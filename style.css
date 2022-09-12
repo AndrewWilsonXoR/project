@@ -163,3 +163,8 @@ td{
     width:200px;
     overflow-y:auto;
 }
+#bigtext{
+    font-size:24px;
+    color:#A52A2A;
+    text-shadow:#4169E1;
+}

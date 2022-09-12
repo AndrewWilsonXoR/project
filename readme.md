@@ -1,3 +1,20 @@
+2 player offline chess game
+
+8x8 board referenced to by "a1...h1-a8...h8"
+
+the game will simulate potential moves on an invisible copied "dummyboard"
+because this is what most other chess engines used from my research.
+
+no pieces are allowed to jump pieces besides the knight
+
+working castle functionality 
+
+
+TDL ://
+sometimes knight movement causes game to crash.
+incorrectly selecting a piece will cause the highlight and removehighlight function not to work properly, usually requiring a refresh
+sometimes the page will stop responding, and i'm not entirely sure why. I dont have any errors in the console so I really dont know what could be causing it.
+
 so this looks a lot more complicated than it really is, the html really boils down to assigning the alt codes into the appropriate divs, and allowing them to be manevurable.
 
 function add highlight reads the dummy board which has baked in current position and adds a highlight to all potential moves upon clicking the corresponding piece,
